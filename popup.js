@@ -7,6 +7,12 @@ document.getElementById("saveRule").addEventListener("click", () => {
       return;
     }
   
+    // Ensure the redirect URL is valid
+    if (!isValidUrl(redirectSite)) {
+      alert("Please enter a valid redirect URL (e.g., https://example.com)");
+      return;
+    }
+  
     chrome.runtime.sendMessage({
       action: "addRule",
       blockSite: blockSite,
@@ -18,6 +24,15 @@ document.getElementById("saveRule").addEventListener("click", () => {
   
     loadRules();
   });
+  
+  function isValidUrl(string) {
+    try {
+      new URL(string); // Throws if invalid
+      return true;
+    } catch (err) {
+      return false;
+    }
+  }
   
   function loadRules() {
     chrome.storage.local.get("rules", (data) => {

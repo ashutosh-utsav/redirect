@@ -1,7 +1,6 @@
 chrome.runtime.onInstalled.addListener(() => {
-    // Clear any existing rules on install
     chrome.declarativeNetRequest.updateDynamicRules({
-      removeRuleIds: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], // Clear previous rules
+      removeRuleIds: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
       addRules: []
     });
   });
@@ -17,7 +16,7 @@ chrome.runtime.onInstalled.addListener(() => {
           priority: 1,
           action: {
             type: "redirect",
-            redirect: { url: message.redirectUrl }
+            redirect: { url: ensureHttps(message.redirectUrl) }
           },
           condition: {
             urlFilter: message.blockSite,
@@ -27,9 +26,7 @@ chrome.runtime.onInstalled.addListener(() => {
   
         rules.push(newRule);
   
-        // Save new rules
         chrome.storage.local.set({ rules }, () => {
-          // Update DNR rules
           chrome.declarativeNetRequest.updateDynamicRules({
             removeRuleIds: rules.map(rule => rule.id),
             addRules: rules
@@ -38,4 +35,11 @@ chrome.runtime.onInstalled.addListener(() => {
       });
     }
   });
+  
+  function ensureHttps(url) {
+    if (!/^https?:\/\//i.test(url)) {
+      return "https://" + url; // Add https if missing
+    }
+    return url;
+  }
   
