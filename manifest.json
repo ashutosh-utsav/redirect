@@ -1,21 +1,13 @@
 {
     "manifest_version": 3,
-    "name": "Site Redirector",
+    "name": "Custom Redirect Extension",
     "version": "1.0",
-    "description": "Redirect specific websites to others.",
-    "permissions": ["declarativeNetRequest"],
-    "host_permissions": ["*://*.youtube.com/*", "*://*.facebook.com/*"],
-    "declarative_net_request": {
-      "rule_resources": [
-        {
-          "id": "ruleset_1",
-          "enabled": true,
-          "path": "rules.json"
-        }
-      ]
+    "permissions": ["declarativeNetRequest", "storage"],
+    "background": {
+      "service_worker": "background.js"
     },
-    "icons": {
-      "48": "icon.png"
+    "action": {
+      "default_popup": "popup.html"
     }
   }
   

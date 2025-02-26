@@ -1,14 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Site Redirector</title>
+    <meta charset="UTF-8">
+    <title>Redirect Rules</title>
 </head>
 <body>
-  <h2>Active Redirects</h2>
-  <ul>
-    <li>YouTube ➡️ Kindle</li>
-    <li>Facebook ➡️ LinkedIn</li>
-  </ul>
+    <h3>Set a Redirect Rule</h3>
+    <label>Block site (e.g., *://*.youtube.com/*):</label>
+    <input type="text" id="blockSite" placeholder="Enter site to block">
+
+    <label>Redirect to (e.g., https://kindle.com):</label>
+    <input type="text" id="redirectSite" placeholder="Enter redirect URL">
+
+    <button id="saveRule">Save Rule</button>
+
+    <h4>Current Rules:</h4>
+    <ul id="rulesList"></ul>
+
+    <script src="popup.js"></script>
 </body>
 </html>
