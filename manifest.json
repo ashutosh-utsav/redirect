@@ -1,0 +1,15 @@
+{
+    "manifest_version": 3,
+    "name": "Site Redirector",
+    "version": "1.0",
+    "description": "Redirects specific websites to others.",
+    "permissions": ["webRequest", "webRequestBlocking", "declarativeNetRequest"],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "host_permissions": ["<all_urls>"],
+    "icons": {
+      "48": "icon.png"
+    }
+  }
+  
