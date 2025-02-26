@@ -2,12 +2,18 @@
     "manifest_version": 3,
     "name": "Site Redirector",
     "version": "1.0",
-    "description": "Redirects specific websites to others.",
-    "permissions": ["webRequest", "webRequestBlocking", "declarativeNetRequest"],
-    "background": {
-      "service_worker": "background.js"
+    "description": "Redirect specific websites to others.",
+    "permissions": ["declarativeNetRequest"],
+    "host_permissions": ["*://*.youtube.com/*", "*://*.facebook.com/*"],
+    "declarative_net_request": {
+      "rule_resources": [
+        {
+          "id": "ruleset_1",
+          "enabled": true,
+          "path": "rules.json"
+        }
+      ]
     },
-    "host_permissions": ["<all_urls>"],
     "icons": {
       "48": "icon.png"
     }

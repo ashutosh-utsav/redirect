@@ -1,17 +1,29 @@
-const redirects = {
-    "https://www.youtube.com/": "https://www.ashutoshutsav.in/"
-  };
-  
-  chrome.webRequest.onBeforeRequest.addListener(
-    function (details) {
-      const url = details.url;
-      for (let key in redirects) {
-        if (url.startsWith(key)) {
-          return { redirectUrl: redirects[key] };
+chrome.declarativeNetRequest.updateDynamicRules({
+    addRules: [
+      {
+        id: 1,
+        priority: 1,
+        action: {
+          type: "redirect",
+          redirect: { url: "https://www.ashutoshutsav.in/" }
+        },
+        condition: {
+          urlFilter: "youtube.com",
+          resourceTypes: ["main_frame"]
+        }
+      },
+      {
+        id: 2,
+        priority: 1,
+        action: {
+          type: "redirect",
+          redirect: { url: "https://www.linkedin.com/" }
+        },
+        condition: {
+          urlFilter: "facebook.com",
+          resourceTypes: ["main_frame"]
         }
       }
-    },
-    { urls: ["<all_urls>"] },
-    ["blocking"]
-  );
+    ]
+  });
   
